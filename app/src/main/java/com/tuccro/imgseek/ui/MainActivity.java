@@ -4,6 +4,7 @@ import android.app.LoaderManager;
 import android.content.Loader;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -16,7 +17,9 @@ import android.view.Menu;
 
 import com.tuccro.imgseek.R;
 import com.tuccro.imgseek.model.ImageDescriptor;
+import com.tuccro.imgseek.ui.adapters.IOnIconClick;
 import com.tuccro.imgseek.ui.adapters.SearchListAdapter;
+import com.tuccro.imgseek.ui.fragments.FragmentPreview;
 import com.tuccro.imgseek.ui.fragments.FragmentSaved;
 import com.tuccro.imgseek.ui.fragments.FragmentSearch;
 import com.tuccro.imgseek.utils.SearchLoader;
@@ -24,7 +27,9 @@ import com.tuccro.imgseek.utils.SearchLoader;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
-        LoaderManager.LoaderCallbacks<List<ImageDescriptor>>, FragmentSearch.OnSearchListInteraction, SearchListAdapter.IOnDbUpgrade {
+        LoaderManager.LoaderCallbacks<List<ImageDescriptor>>,
+        FragmentSearch.OnSearchListInteraction,
+        SearchListAdapter.IOnDbUpgrade, IOnIconClick {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -119,6 +124,12 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onDbUpgrade() {
         fragmentSaved.initList();
+    }
+
+    @Override
+    public void onIconClick(ImageDescriptor descriptor) {
+        DialogFragment dialog = new FragmentPreview();
+        dialog.show(getSupportFragmentManager(), "tag");
     }
 
     /**

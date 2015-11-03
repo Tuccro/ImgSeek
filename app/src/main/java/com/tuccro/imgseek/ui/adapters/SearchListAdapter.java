@@ -27,12 +27,14 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
     Context mContext;
 
     IOnDbUpgrade iOnDbUpgrade;
+    IOnIconClick iOnIconClick;
 
     public SearchListAdapter(List<ImageDescriptor> descriptors, Context mContext) {
         this.descriptors = descriptors;
         this.mContext = mContext;
 
         iOnDbUpgrade = (IOnDbUpgrade) mContext;
+        iOnIconClick = (IOnIconClick) mContext;
     }
 
     @Override
@@ -69,6 +71,13 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
                     iOnDbUpgrade.onDbUpgrade();
                 }
+            }
+        });
+
+        holder.imageThumbnail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iOnIconClick.onIconClick(descriptor);
             }
         });
     }

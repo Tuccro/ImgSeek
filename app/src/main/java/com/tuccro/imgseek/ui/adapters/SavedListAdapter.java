@@ -23,9 +23,13 @@ public class SavedListAdapter extends RecyclerView.Adapter<SavedListAdapter.View
     private List<ImageDescriptor> descriptors;
     Context mContext;
 
+    IOnIconClick iOnIconClick;
+
     public SavedListAdapter(List<ImageDescriptor> descriptors, Context mContext) {
         this.descriptors = descriptors;
         this.mContext = mContext;
+
+        iOnIconClick = (IOnIconClick) mContext;
     }
 
     @Override
@@ -47,6 +51,13 @@ public class SavedListAdapter extends RecyclerView.Adapter<SavedListAdapter.View
         } catch (Exception e) {
         } catch (OutOfMemoryError error) {
         }
+
+        holder.imageThumbnail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iOnIconClick.onIconClick(descriptor);
+            }
+        });
     }
 
     @Override
