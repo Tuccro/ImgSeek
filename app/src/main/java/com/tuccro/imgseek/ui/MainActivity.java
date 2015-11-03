@@ -14,7 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import com.tuccro.imgseek.R;
-import com.tuccro.imgseek.SearchLoader;
+import com.tuccro.imgseek.utils.SearchLoader;
 import com.tuccro.imgseek.model.ImageDescriptor;
 
 import java.util.List;

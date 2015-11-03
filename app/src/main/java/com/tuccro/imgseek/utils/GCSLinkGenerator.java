@@ -34,7 +34,7 @@ public class GCSLinkGenerator {
         this.paramValueQuery = query;
     }
 
-    public String getNexTenEntriesLink() {
+    public String getNextTenEntriesLink() {
 
         String paramString = getParamString();
         paramValueStart += PARAM_VALUE_NUM;
