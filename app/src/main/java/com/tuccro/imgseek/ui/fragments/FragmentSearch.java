@@ -74,7 +74,7 @@ public class FragmentSearch extends Fragment {
 
     public void initList() {
         imageDescriptors = new ArrayList<ImageDescriptor>();
-        searchListAdapter = new SearchListAdapter(imageDescriptors);
+        searchListAdapter = new SearchListAdapter(imageDescriptors, getContext());
         listSearch.setAdapter(searchListAdapter);
     }
 

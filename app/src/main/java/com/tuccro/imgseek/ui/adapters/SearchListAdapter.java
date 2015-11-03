@@ -1,5 +1,6 @@
 package com.tuccro.imgseek.ui.adapters;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tuccro.imgseek.R;
+import com.tuccro.imgseek.db.DBOwner;
 import com.tuccro.imgseek.model.ImageDescriptor;
 
 import java.util.List;
@@ -22,9 +24,11 @@ import java.util.List;
 public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ViewHolder> {
 
     private List<ImageDescriptor> descriptors;
+    Context mContext;
 
-    public SearchListAdapter(List<ImageDescriptor> descriptors) {
+    public SearchListAdapter(List<ImageDescriptor> descriptors, Context mContext) {
         this.descriptors = descriptors;
+        this.mContext = mContext;
     }
 
     @Override
@@ -35,7 +39,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ImageDescriptor descriptor = descriptors.get(position);
+        final ImageDescriptor descriptor = descriptors.get(position);
 
         holder.textDescribe.setText(descriptor.getDescription());
 
@@ -52,6 +56,12 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     buttonView.setEnabled(false);
+
+                    DBOwner dbOwner = new DBOwner(mContext);
+                    dbOwner.openConnection();
+                    // Add ImageDescriptor to DB
+                    dbOwner.addImageDescriptorToDB(descriptor);
+                    dbOwner.closeConnection();
                 }
             }
         });
