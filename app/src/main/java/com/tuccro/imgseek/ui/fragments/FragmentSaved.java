@@ -9,6 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tuccro.imgseek.R;
+import com.tuccro.imgseek.db.DBOwner;
+import com.tuccro.imgseek.model.ImageDescriptor;
+import com.tuccro.imgseek.ui.adapters.SavedListAdapter;
+import com.tuccro.imgseek.utils.DBUtils;
+
+import java.util.List;
 
 /**
  * Created by tuccro on 11/3/15.
@@ -17,6 +23,8 @@ public class FragmentSaved extends Fragment {
 
     RecyclerView listSaved;
     LinearLayoutManager linearLayoutManager;
+
+    List<ImageDescriptor> imageDescriptors;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,8 +39,20 @@ public class FragmentSaved extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         listSaved.setLayoutManager(linearLayoutManager);
 
-//        listSaved.setOnScrollListener(onScrollListener);
+        initList();
 
         return view;
+    }
+    public void initList() {
+
+        DBOwner dbOwner = new DBOwner(getContext());
+        dbOwner.openConnection();
+
+        imageDescriptors = DBUtils.imageDescriptorListFromCursor(dbOwner.getImageDescriptorsCursor());
+
+        dbOwner.closeConnection();
+
+        SavedListAdapter savedListAdapter = new SavedListAdapter(imageDescriptors, getContext());
+        listSaved.setAdapter(savedListAdapter);
     }
 }

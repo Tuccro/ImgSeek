@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             if (position == 0) return fragmentSearch;
-            return fragmentSaved;
+            else return fragmentSaved;
         }
 
         @Override

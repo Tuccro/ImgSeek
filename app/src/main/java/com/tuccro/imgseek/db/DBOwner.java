@@ -2,6 +2,7 @@ package com.tuccro.imgseek.db;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -43,5 +44,9 @@ public class DBOwner {
         } catch (Exception e) {
             Log.e("Can't add img to DB", e.getMessage());
         }
+    }
+
+    public Cursor getImageDescriptorsCursor() {
+        return mDB.query(DBValues.DB_TABLE_IMG, null, null, null, null, null, null);
     }
 }

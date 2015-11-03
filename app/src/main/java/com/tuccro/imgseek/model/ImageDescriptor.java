@@ -5,18 +5,27 @@ package com.tuccro.imgseek.model;
  */
 public class ImageDescriptor {
 
-    String imageUrl;
-    String thumbnailUrl;
+    String description;
 
-    String imageLocalUrl;
+    String thumbnailUrl;
     String thumbnailLocalUrl;
 
-    String description;
+    String imageUrl;
+    String imageLocalUrl;
+
 
     public ImageDescriptor(String description, String thumbnailUrl, String imageUrl) {
         this.imageUrl = imageUrl;
         this.thumbnailUrl = thumbnailUrl;
         this.description = description;
+    }
+
+    public ImageDescriptor(String description, String thumbnailUrl, String thumbnailLocalUrl, String imageUrl, String imageLocalUrl) {
+        this.description = description;
+        this.thumbnailUrl = thumbnailUrl;
+        this.thumbnailLocalUrl = thumbnailLocalUrl;
+        this.imageUrl = imageUrl;
+        this.imageLocalUrl = imageLocalUrl;
     }
 
     public String getImageUrl() {
