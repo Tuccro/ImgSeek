@@ -1,4 +1,4 @@
-package com.tuccro.imgseek.asynktask;
+package com.tuccro.imgseek.asynk;
 
 import com.tuccro.imgseek.model.ImageDescriptor;
 

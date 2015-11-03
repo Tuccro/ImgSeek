@@ -1,4 +1,4 @@
-package com.tuccro.imgseek.ui;
+package com.tuccro.imgseek.ui.fragments;
 
 import android.support.v4.app.Fragment;
 

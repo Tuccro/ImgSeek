@@ -14,8 +14,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import com.tuccro.imgseek.R;
-import com.tuccro.imgseek.utils.SearchLoader;
 import com.tuccro.imgseek.model.ImageDescriptor;
+import com.tuccro.imgseek.ui.fragments.FragmentSaved;
+import com.tuccro.imgseek.ui.fragments.FragmentSearch;
+import com.tuccro.imgseek.utils.SearchLoader;
 
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
-     * The {@link ViewPager} that will host the section contents.
+     * The {@link ViewPager} that host the section contents.
      */
     private ViewPager mViewPager;
 
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements
     FragmentSaved fragmentSaved;
 
     Loader<Object> searchLoader;
+    int searchLoaderId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,16 +84,15 @@ public class MainActivity extends AppCompatActivity implements
     public Loader<List<ImageDescriptor>> onCreateLoader(int id, Bundle args) {
 
         Loader<List<ImageDescriptor>> loader = null;
-//        if (id == searchLoaderId) {
-        loader = new SearchLoader(this, args);
-
-//        }
+        if (id == searchLoaderId) {
+            loader = new SearchLoader(this, args);
+        }
         return loader;
     }
 
     @Override
     public void onLoadFinished(Loader<List<ImageDescriptor>> loader, List<ImageDescriptor> data) {
-        fragmentSearch.initList(data);
+        fragmentSearch.appendList(data);
         fragmentSearch.setProgressBarVisibility(false);
     }
 
@@ -101,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void loadNextResults() {
-        searchLoader = getLoaderManager().getLoader(1234);
+        searchLoader = getLoaderManager().getLoader(searchLoaderId);
 
         if (searchLoader != null) {
             searchLoader.forceLoad();
@@ -128,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
+            // Show 2 total pages.
             return 2;
         }
 
@@ -151,10 +153,11 @@ public class MainActivity extends AppCompatActivity implements
             Bundle bundle = new Bundle();
             bundle.putString(SearchLoader.ARG_QUERY, query);
 
-            // TODO: 11/2/15 add normal id
-            getLoaderManager().initLoader(1234, bundle, MainActivity.this);
+            searchLoaderId = query.hashCode();
 
-            searchLoader = getLoaderManager().getLoader(1234);
+            getLoaderManager().initLoader(searchLoaderId, bundle, MainActivity.this);
+
+            searchLoader = getLoaderManager().getLoader(searchLoaderId);
 
             if (searchLoader != null) {
                 searchLoader.forceLoad();

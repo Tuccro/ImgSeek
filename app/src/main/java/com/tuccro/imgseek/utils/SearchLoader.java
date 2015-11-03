@@ -6,9 +6,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.tuccro.imgseek.asynktask.AsyncImagesDownloader;
-import com.tuccro.imgseek.asynktask.AsyncJsonStringLoader;
-import com.tuccro.imgseek.asynktask.IOnReadyCallBack;
+import com.tuccro.imgseek.asynk.AsyncImagesDownloader;
+import com.tuccro.imgseek.asynk.AsyncJsonStringLoader;
+import com.tuccro.imgseek.asynk.IOnReadyCallBack;
 import com.tuccro.imgseek.model.ImageDescriptor;
 
 import java.util.List;
@@ -24,7 +24,6 @@ public class SearchLoader extends Loader<List<ImageDescriptor>> implements IOnRe
     GCSLinkGenerator gcsLinkGenerator;
 
     private AsyncJsonStringLoader asyncJsonStringLoader;
-    private int start = 0;
     private String query;
 
     public SearchLoader(Context context, Bundle args) {

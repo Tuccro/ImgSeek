@@ -1,4 +1,4 @@
-package com.tuccro.imgseek.asynktask;
+package com.tuccro.imgseek.asynk;
 
 import android.content.Loader;
 import android.os.AsyncTask;

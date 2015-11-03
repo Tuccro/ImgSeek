@@ -1,4 +1,4 @@
-package com.tuccro.imgseek.ui;
+package com.tuccro.imgseek.ui.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import com.tuccro.imgseek.R;
 import com.tuccro.imgseek.model.ImageDescriptor;
 import com.tuccro.imgseek.ui.adapters.SearchListAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +28,8 @@ public class FragmentSearch extends Fragment {
     private ProgressBar progressBar;
 
     LinearLayoutManager linearLayoutManager;
+
+    SearchListAdapter searchListAdapter;
 
     long lastUpdate;
 
@@ -58,6 +61,8 @@ public class FragmentSearch extends Fragment {
 
         listSearch.setOnScrollListener(onScrollListener);
 
+        initList();
+
         return view;
     }
 
@@ -65,7 +70,14 @@ public class FragmentSearch extends Fragment {
         progressBar.setVisibility((visible) ? View.VISIBLE : View.GONE);
     }
 
-    public void initList(List<ImageDescriptor> descriptors) {
+    public void initList() {
+        searchListAdapter = new SearchListAdapter(new ArrayList<ImageDescriptor>());
+        listSearch.setAdapter(searchListAdapter);
+    }
+
+    // TODO: 11/3/15 to add append data to list
+    public void appendList(List<ImageDescriptor> descriptors) {
+
         SearchListAdapter searchListAdapter = new SearchListAdapter(descriptors);
         listSearch.setAdapter(searchListAdapter);
 
