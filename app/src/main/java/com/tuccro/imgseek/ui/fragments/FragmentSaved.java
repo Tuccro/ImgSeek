@@ -24,6 +24,7 @@ public class FragmentSaved extends Fragment {
     RecyclerView listSaved;
     LinearLayoutManager linearLayoutManager;
 
+    SavedListAdapter savedListAdapter;
     List<ImageDescriptor> imageDescriptors;
 
     @Override
@@ -43,16 +44,17 @@ public class FragmentSaved extends Fragment {
 
         return view;
     }
+
     public void initList() {
 
-        DBOwner dbOwner = new DBOwner(getContext());
+        DBOwner dbOwner = new DBOwner(getActivity());
         dbOwner.openConnection();
 
         imageDescriptors = DBUtils.imageDescriptorListFromCursor(dbOwner.getImageDescriptorsCursor());
 
         dbOwner.closeConnection();
 
-        SavedListAdapter savedListAdapter = new SavedListAdapter(imageDescriptors, getContext());
+        savedListAdapter = new SavedListAdapter(imageDescriptors, getContext());
         listSaved.setAdapter(savedListAdapter);
     }
 }

@@ -42,8 +42,8 @@ public class SavedListAdapter extends RecyclerView.Adapter<SavedListAdapter.View
 
         try {
             Bitmap bitmap = BitmapFactory.decodeFile(descriptor.getThumbnailLocalUrl());
-
             holder.imageThumbnail.setImageBitmap(bitmap);
+
         } catch (Exception e) {
         } catch (OutOfMemoryError error) {
         }

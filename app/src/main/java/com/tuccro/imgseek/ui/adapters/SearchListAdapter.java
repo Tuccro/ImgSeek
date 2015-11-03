@@ -26,9 +26,13 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
     private List<ImageDescriptor> descriptors;
     Context mContext;
 
+    IOnDbUpgrade iOnDbUpgrade;
+
     public SearchListAdapter(List<ImageDescriptor> descriptors, Context mContext) {
         this.descriptors = descriptors;
         this.mContext = mContext;
+
+        iOnDbUpgrade = (IOnDbUpgrade) mContext;
     }
 
     @Override
@@ -45,8 +49,8 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
         try {
             Bitmap bitmap = BitmapFactory.decodeFile(descriptor.getThumbnailLocalUrl());
-
             holder.imageThumbnail.setImageBitmap(bitmap);
+
         } catch (Exception e) {
         } catch (OutOfMemoryError error) {
         }
@@ -62,6 +66,8 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
                     // Add ImageDescriptor to DB
                     dbOwner.addImageDescriptorToDB(descriptor);
                     dbOwner.closeConnection();
+
+                    iOnDbUpgrade.onDbUpgrade();
                 }
             }
         });
@@ -85,5 +91,9 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
             textDescribe = (TextView) itemView.findViewById(R.id.textDescribe);
             checkBox = (CheckBox) itemView.findViewById(R.id.checkboxSave);
         }
+    }
+
+    public interface IOnDbUpgrade {
+        void onDbUpgrade();
     }
 }

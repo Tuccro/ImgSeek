@@ -16,6 +16,7 @@ import android.view.Menu;
 
 import com.tuccro.imgseek.R;
 import com.tuccro.imgseek.model.ImageDescriptor;
+import com.tuccro.imgseek.ui.adapters.SearchListAdapter;
 import com.tuccro.imgseek.ui.fragments.FragmentSaved;
 import com.tuccro.imgseek.ui.fragments.FragmentSearch;
 import com.tuccro.imgseek.utils.SearchLoader;
@@ -23,7 +24,7 @@ import com.tuccro.imgseek.utils.SearchLoader;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
-        LoaderManager.LoaderCallbacks<List<ImageDescriptor>>, FragmentSearch.OnSearchListInteraction {
+        LoaderManager.LoaderCallbacks<List<ImageDescriptor>>, FragmentSearch.OnSearchListInteraction, SearchListAdapter.IOnDbUpgrade {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -113,6 +114,11 @@ public class MainActivity extends AppCompatActivity implements
             fragmentSearch.setProgressBarVisibility(true);
             searchLoader.forceLoad();
         }
+    }
+
+    @Override
+    public void onDbUpgrade() {
+        fragmentSaved.initList();
     }
 
     /**
