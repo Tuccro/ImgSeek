@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,10 +44,17 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
             holder.imageThumbnail.setImageBitmap(bitmap);
         } catch (Exception e) {
-
         } catch (OutOfMemoryError error) {
-
         }
+
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    buttonView.setEnabled(false);
+                }
+            }
+        });
     }
 
     @Override
@@ -57,12 +66,14 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
 
         ImageView imageThumbnail;
         TextView textDescribe;
+        CheckBox checkBox;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             imageThumbnail = (ImageView) itemView.findViewById(R.id.imageThumbnail);
             textDescribe = (TextView) itemView.findViewById(R.id.textDescribe);
+            checkBox = (CheckBox) itemView.findViewById(R.id.checkboxSave);
         }
     }
 }
