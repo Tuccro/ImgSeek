@@ -91,9 +91,9 @@ public class FragmentSearch extends Fragment {
         public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 
             int listSize = linearLayoutManager.getChildCount();
-            int lastPosition = linearLayoutManager.findLastCompletelyVisibleItemPosition();
+            int lastPosition = linearLayoutManager.findLastVisibleItemPosition();
 
-            if (lastPosition == listSize && System.currentTimeMillis() > lastUpdate + 1500) {
+            if (lastPosition >= listSize && System.currentTimeMillis() > lastUpdate + 1500) {
                 onSearchListInteraction.loadNextResults();
             }
         }

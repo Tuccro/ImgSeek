@@ -46,8 +46,6 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         } catch (OutOfMemoryError error) {
 
         }
-
-        // TODO: 11/2/15 ADD IMAGE
     }
 
     @Override
