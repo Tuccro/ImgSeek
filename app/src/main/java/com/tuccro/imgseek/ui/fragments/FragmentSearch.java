@@ -33,6 +33,8 @@ public class FragmentSearch extends Fragment {
 
     long lastUpdate;
 
+    List<ImageDescriptor> imageDescriptors;
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -71,15 +73,15 @@ public class FragmentSearch extends Fragment {
     }
 
     public void initList() {
-        searchListAdapter = new SearchListAdapter(new ArrayList<ImageDescriptor>());
+        imageDescriptors = new ArrayList<ImageDescriptor>();
+        searchListAdapter = new SearchListAdapter(imageDescriptors);
         listSearch.setAdapter(searchListAdapter);
     }
 
-    // TODO: 11/3/15 to add append data to list
     public void appendList(List<ImageDescriptor> descriptors) {
 
-        SearchListAdapter searchListAdapter = new SearchListAdapter(descriptors);
-        listSearch.setAdapter(searchListAdapter);
+        imageDescriptors.addAll(descriptors);
+        searchListAdapter.notifyDataSetChanged();
 
         lastUpdate = System.currentTimeMillis();
     }
@@ -91,7 +93,7 @@ public class FragmentSearch extends Fragment {
             int listSize = linearLayoutManager.getChildCount();
             int lastPosition = linearLayoutManager.findLastCompletelyVisibleItemPosition();
 
-            if (lastPosition == listSize && System.currentTimeMillis() > lastUpdate + 3000) {
+            if (lastPosition == listSize && System.currentTimeMillis() > lastUpdate + 1500) {
                 onSearchListInteraction.loadNextResults();
             }
         }

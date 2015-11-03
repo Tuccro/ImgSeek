@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 
 import com.tuccro.imgseek.R;
@@ -103,9 +104,13 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void loadNextResults() {
+
+        Log.d(this.getLocalClassName(), "Loading next results...");
         searchLoader = getLoaderManager().getLoader(searchLoaderId);
 
         if (searchLoader != null) {
+
+            fragmentSearch.setProgressBarVisibility(true);
             searchLoader.forceLoad();
         }
     }
@@ -162,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements
             if (searchLoader != null) {
                 searchLoader.forceLoad();
                 fragmentSearch.setProgressBarVisibility(true);
+                fragmentSearch.initList();
             }
             return false;
         }
