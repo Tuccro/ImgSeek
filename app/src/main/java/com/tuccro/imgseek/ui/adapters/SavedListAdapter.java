@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +49,8 @@ public class SavedListAdapter extends RecyclerView.Adapter<SavedListAdapter.View
             Bitmap bitmap = BitmapFactory.decodeFile(descriptor.getThumbnailLocalUrl());
             holder.imageThumbnail.setImageBitmap(bitmap);
 
-        } catch (Exception e) {
-        } catch (OutOfMemoryError error) {
+        } catch (Exception | OutOfMemoryError e) {
+            Log.e("Can not load image", e.getMessage());
         }
 
         holder.imageThumbnail.setOnClickListener(new View.OnClickListener() {

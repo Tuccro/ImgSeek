@@ -41,14 +41,13 @@ public class JsonImagesParser {
 
                 title = object.get("title").toString();
 
+                // TODO: 11/4/15 Find really small icon
                 JsonObject pageMap = object.getAsJsonObject("pagemap");
                 JsonArray cseImage = pageMap.getAsJsonArray("cse_image");
-//                JsonObject imageobject = pageMap.getAsJsonObject("imageobject");
+//                JsonObject imageObject = pageMap.getAsJsonObject("imageobject");
 
                 urlIcon = ((JsonObject) cseImage.get(0)).get("src").toString();
                 urlImage = ((JsonObject) cseImage.get(0)).get("src").toString();
-
-//                Log.e("Image URL", ((JsonObject) cseImage.get(0)).get("src").toString());
 
                 list.add(new ImageDescriptor(title.substring(1, title.length() - 1)
                         , urlIcon.substring(1, urlIcon.length() - 1)

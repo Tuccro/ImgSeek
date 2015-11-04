@@ -43,6 +43,7 @@ public class GCSLinkGenerator {
         return SERVER_URL + paramString;
     }
 
+    @SuppressWarnings("deprecation")
     private String getParamString() {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
 

@@ -61,16 +61,8 @@ public class AsyncImagesDownloader extends AsyncTask<List<ImageDescriptor>, Void
                 outputStreamIcon.flush();
                 outputStreamIcon.close();
 
-            } catch (MalformedURLException e) {
+            } catch (Exception | OutOfMemoryError e) {
                 e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (RuntimeException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            } catch (OutOfMemoryError error) {
-                error.printStackTrace();
             }
         }
         return list;

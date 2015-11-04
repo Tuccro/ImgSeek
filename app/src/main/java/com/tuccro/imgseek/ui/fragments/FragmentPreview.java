@@ -45,7 +45,7 @@ public class FragmentPreview extends DialogFragment {
 
             Bitmap bitmap = BitmapFactory.decodeFile(imgUrl);
             imagePreview.setImageBitmap(bitmap);
-        } catch (Exception e) {
+        } catch (Exception | OutOfMemoryError e) {
             Log.e("Error init image", e.getMessage());
         }
 

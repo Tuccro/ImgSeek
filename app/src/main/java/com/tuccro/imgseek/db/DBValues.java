@@ -19,7 +19,7 @@ public class DBValues {
 
     public static final String DB_TABLE_IMG = "images";
 
-    public static final String DB_TABLE_IMG_ID = "id";
+    public static final String DB_TABLE_IMG_ID = "_id";
     public static final String DB_TABLE_IMG_TEXT = "text";
     public static final String DB_TABLE_IMG_ICON = "icon_url";
     public static final String DB_TABLE_IMG_ICON_LOCAL = "icon_local_url";

@@ -32,7 +32,7 @@ public class AsyncJsonStringLoader extends AsyncTask<String, Void, String> {
 
             InputStream inputStream = new BufferedInputStream(url.openConnection().getInputStream());
 
-            StringBuffer response = new StringBuffer();
+            StringBuilder response = new StringBuilder();
             Scanner sc = new Scanner(inputStream);
 
             while (sc.hasNext()) {
@@ -42,8 +42,6 @@ public class AsyncJsonStringLoader extends AsyncTask<String, Void, String> {
             resp = response.toString();
             return resp;
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
