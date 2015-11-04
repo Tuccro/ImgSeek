@@ -6,9 +6,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.tuccro.imgseek.asynk.AsyncImagesDownloader;
-import com.tuccro.imgseek.asynk.AsyncJsonStringLoader;
-import com.tuccro.imgseek.asynk.IOnReadyCallBack;
+import com.tuccro.imgseek.async.AsyncImagesDownloader;
+import com.tuccro.imgseek.async.AsyncJsonStringLoader;
+import com.tuccro.imgseek.async.IOnReadyCallBack;
 import com.tuccro.imgseek.model.ImageDescriptor;
 
 import java.util.List;
