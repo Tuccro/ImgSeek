@@ -129,6 +129,11 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onIconClick(ImageDescriptor descriptor) {
         DialogFragment dialog = new FragmentPreview();
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FragmentPreview.PARAM_IMG_URL, descriptor.getImageLocalUrl());
+        dialog.setArguments(bundle);
+
         dialog.show(getSupportFragmentManager(), "tag");
     }
 
